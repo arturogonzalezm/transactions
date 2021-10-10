@@ -1,5 +1,4 @@
 ## SISU SOLUTIONS CODING ASSESSMENT – DATA ENGINEERING ##
---
 ***
 ### Instructions:
 - Set up PySpark locally.
