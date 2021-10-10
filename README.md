@@ -12,7 +12,9 @@ python main.py
 - Apache Spark 3.1.2
 - Python 3.8
 ***
-### TODO:
+### Diagram:
+The implemented approach was a hybrid Delta Lake as the below diagram:
+![alt text](https://github.com/arturogonzalezm/transactions/images/delta_lake.png)
 ***
 ### Results:
 ```
