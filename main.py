@@ -5,7 +5,7 @@ from silver import silver
 
 if __name__ == '__main__':
     # bronze()
-    silver()
-    # gold()
+    # silver()
+    gold()
     # report()
 
