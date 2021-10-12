@@ -4,8 +4,8 @@ from report import report
 from silver import silver
 
 if __name__ == '__main__':
-    bronze()
+    # bronze()
     silver()
-    gold()
-    report()
+    # gold()
+    # report()
 

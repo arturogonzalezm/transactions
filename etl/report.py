@@ -13,5 +13,5 @@ def report():
                             SELECT AgentID, PostCode, max(Amount) AS MaxAmount FROM top_agents GROUP BY AgentID, PostCode ORDER BY MaxAmount DESC;
                             """
     top_agents_df = spark.sql(top_agents_query)
-    top_agents_df.show()
+    top_agents_df.show(100, truncate=False)
     return top_agents_df.repartition(1).write.parquet(OUTPUT_PATH + 'report', mode='overwrite')
