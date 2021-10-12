@@ -11,6 +11,7 @@ python main.py
 - PyCharm IDE
 - Apache Spark 3.1.2
 - Python 3.7
+- Notebooks
 ***
 ### Diagram:
 The implemented approach was a hybrid Delta Lake as the below diagram:
