@@ -2,16 +2,7 @@ from pyspark.shell import spark
 from pyspark.sql import functions as F
 
 from misc.constants import OUTPUT_PATH
-from schema_definition.schema import silver_schema, gold_schema
+from schema_definition.schema import gold_schema
 
-
-def gold():
-    silver_df = spark.read.csv(OUTPUT_PATH + 'silver/*.csv', sep=',', header=True, schema=silver_schema, enforceSchema=True)
-    response = silver_df.withColumn("Response", F.datediff(F.col("RequestDate"), F.col("ImplementedDate")))
-    response.createOrReplaceTempView("fastest_response")
-    fastest_response_query = """
-                        SELECT * FROM fastest_response ORDER BY Response DESC
-                        """
-    fastest_response_df = spark.sql(fastest_response_query).show()
-    return fastest_response_df
-    # return fastest_response_df.repartition(1).write.option("maxRecordsPerFile", 1000).json(OUTPUT_PATH + 'gold', mode='overwrite')
+silver_df = spark.read.csv(OUTPUT_PATH + 'silver/*.csv', sep=',', header=True, schema=gold_schema, enforceSchema=True)
+silver_df.repartition(1).write.option("maxRecordsPerFile", 1000).json(OUTPUT_PATH + 'gold', mode='overwrite')
