@@ -33,5 +33,5 @@ fastest_response_query = """
 fastest_response_df = spark.sql(fastest_response_query)
 
 drop_nulls = fastest_response_df.na.drop(subset=["AccountID"])
-filter_out = drop_nulls.filter(drop_nulls.Fibre.startswith('E'))
+filter_out = drop_nulls.filter(~drop_nulls.Fibre.startswith('2.67E'))
 filter_out.repartition(1).write.csv(OUTPUT_PATH + 'silver', sep=',', header=True, mode='overwrite')

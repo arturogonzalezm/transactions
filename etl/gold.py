@@ -1,5 +1,4 @@
 from pyspark.shell import spark
-from pyspark.sql import functions as F
 
 from misc.constants import OUTPUT_PATH
 from schema_definition.schema import gold_schema
