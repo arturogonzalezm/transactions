@@ -1,11 +1,12 @@
-from bronze import bronze
-from gold import gold
-from report import report
-from silver import silver
+from datetime import datetime
+dt_string = "7/9/2017 12:00:00 am"
+
+dt_object1 = datetime.strptime(dt_string, "%d/%m/%Y %H:%M:%S %p")
+print("dt_object1:", dt_object1)
+
+
+def convert_date(date):
+    return datetime.strptime(date, "%d/%m/%Y %H:%M:%S %p")
 
 if __name__ == '__main__':
-    # bronze()
-    # silver()
-    gold()
-    # report()
-
+    print(convert_date(dt_string))
