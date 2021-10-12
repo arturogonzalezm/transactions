@@ -17,8 +17,11 @@ def convert_date(date):
 spark.udf.register("convert_date", convert_date, TimestampType())
 
 
-bronze_df = spark.read.csv(OUTPUT_PATH + 'bronze/*.csv', sep=',', header=True, schema=silver_schema, enforceSchema=True)
-convert_to_timestamp = bronze_df \
+bronze_df = spark.read.csv(OUTPUT_PATH + 'bronze/*.csv', sep='|', header=True, schema=silver_schema, enforceSchema=True)
+
+augment = bronze_df.withColumn("HashKey", F.sha2(F.concat_ws("||", *bronze_df.columns), 256))
+
+convert_to_timestamp = augment \
     .withColumn("ImplementedDate", F.unix_timestamp("ImplementedDate", "d/MM/yyyy HH:mm").cast(TimestampType())) \
     .withColumn("RequestDate", F.to_timestamp("RequestDate", 'dd/MM/yyyy HH:mm').cast(TimestampType())) \
     .withColumn("LastUpdatedDate", F.to_timestamp("LastUpdatedDate", 'dd/MM/yyyy HH:mm').cast(TimestampType()))
@@ -34,4 +37,4 @@ fastest_response_df = spark.sql(fastest_response_query)
 
 drop_nulls = fastest_response_df.na.drop(subset=["AccountID"])
 filter_out = drop_nulls.filter(~drop_nulls.Fibre.startswith('2.67E'))
-filter_out.repartition(1).write.csv(OUTPUT_PATH + 'silver', sep=',', header=True, mode='overwrite')
+filter_out.repartition(1).write.csv(OUTPUT_PATH + 'silver', sep='|', header=True, mode='overwrite')

@@ -17,8 +17,7 @@ bronze_schema = StructType([ \
     StructField("Fibre", StringType(), True), \
     StructField("LastUpdatedDate", StringType(), True), \
     StructField("PropertyType", StringType(), True), \
-    StructField("PostCode", StringType(), True), \
-    StructField("HashKey", StringType(), True)
+    StructField("PostCode", StringType(), True)
 
 ])
 
