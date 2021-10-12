@@ -2,10 +2,6 @@
 ***
 ### Instructions:
 - Set up PySpark locally.
-- Use PyCharm to run main.py or from the CommandLine type:
-```
-python main.py
-```
 ***
 ### Specifications:
 - PyCharm IDE
