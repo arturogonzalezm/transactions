@@ -1,8 +1,7 @@
 from pyspark.shell import spark
-from pyspark.sql import functions as F
+
 
 from misc.constants import RAW_FILE_PATH, OUTPUT_PATH
-from pyspark.sql.types import TimestampType
 from schema_definition.schema import bronze_schema
 
 
