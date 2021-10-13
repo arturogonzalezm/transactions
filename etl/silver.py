@@ -31,7 +31,9 @@ calculate_response = convert_to_timestamp.withColumn("Response", F.datediff(F.co
 calculate_response.createOrReplaceTempView("fastest_response")
 
 fastest_response_query = """
-                        SELECT * FROM fastest_response ORDER BY Response DESC
+                        SELECT * 
+                        FROM fastest_response 
+                        ORDER BY Response DESC
                         """
 fastest_response_df = spark.sql(fastest_response_query)
 
